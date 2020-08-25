@@ -14,3 +14,7 @@ The projects might not have any styling because, as I said, this is just for lea
 ### [Person List](https://react.alphaman.me/personlist/)
 
 A simple page that has a form where you can enter your name, location and age which makes it to display those in a neat unordered list. That's it. Simple as that.
+
+### [Todo App](https://react.alphaman.me/todo-list)
+
+A simple TODO app

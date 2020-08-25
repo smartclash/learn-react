@@ -1,20 +1,26 @@
 import React from 'react';
 
 class TodoItem extends React.Component {
-    constructor() {
-        super()
-
-        this.displayCreatedAt = this.displayCreatedAt.bind(this);
+    displayCreatedAt() {
+        return "Created at " + new Date(this.props.todo.createdAt).toUTCString();
     }
 
-    displayCreatedAt() {
-        return "Created at " + new Date(this.props.todo.createdAt).toUTCString()
+    displayTodo() {
+        const todo = <p title={this.displayCreatedAt()}>{this.props.todo.description}</p>;
+
+        if (this.props.todo.completed) {
+            return <del>{todo}</del>;
+        }
+
+        return todo;
     }
 
     render() {
         return (
             <div>
-                <p title={this.displayCreatedAt()}>{this.props.todo.description}</p>
+                <input type="checkbox" onClick={() => this.props.checker(this.props.todo.id)} />
+                {this.displayTodo()}
+                <button onClick={() => this.props.deleter(this.props.todo.id)}>Delete</button>
                 <hr />
             </div>
         );

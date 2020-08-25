@@ -11,6 +11,8 @@ class App extends React.Component {
 
         this.displayHelp = this.displayHelp.bind(this);
         this.handleNewTodo = this.handleNewTodo.bind(this);
+        this.handleDeleteTodo = this.handleDeleteTodo.bind(this);
+        this.handleCheckboxTodo = this.handleCheckboxTodo.bind(this);
     }
 
     displayHelp() {
@@ -26,6 +28,8 @@ class App extends React.Component {
             .map(todo => <TodoItem
                 key={todo.id}
                 todo={todo}
+                deleter={this.handleDeleteTodo}
+                checker={this.handleCheckboxTodo}
             />);
     }
 
@@ -52,6 +56,23 @@ class App extends React.Component {
                 ]
             }
         });
+    }
+
+    handleDeleteTodo(id) {
+        const freshTodos = this.state.todos.filter(todo => todo.id !== id);
+        this.setState({ todos: freshTodos });
+    }
+
+    handleCheckboxTodo(id) {
+        const freshTodos = this.state.todos.map(todo => {
+            if (todo.id === id) {
+                return {...todo, completed: !todo.completed }
+            }
+
+            return todo;
+        });
+
+        this.setState({ todos: freshTodos });
     }
 
     render() {
